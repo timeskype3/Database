@@ -1,37 +1,50 @@
 import React from 'react';
 import { FormGroup, Form, FormLabel,FormControl,FormText,FormCheck} from 'react-bootstrap';
-import  ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Button from 'react-bootstrap/Button';
+import { Button,Input, Tooltip, Icon,Checkbox } from 'antd';
+
+import "antd/dist/antd.css";
 import 'bootstrap/dist/css/bootstrap.css'
+
+function onChange(e) {
+  console.log(`checked = ${e.target.checked}`);
+}
+
 function Login() {
   return (
     <div className="Form">
       
       <Form>
     <FormGroup controlId="formBasicEmail">
-    <FormLabel>Email address</FormLabel>
-    <FormControl type="email" placeholder="Enter email" />
-    <FormText className="text-muted">
-      We'll never share your email with anyone else.
-    </FormText>
+    <FormLabel>Username</FormLabel>
+    <Input
+    placeholder="Enter your username"
+    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+    suffix={
+      <Tooltip title="We'll never share your email with anyone else.">
+        <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
+      </Tooltip>
+    }
+    />
   </FormGroup>
 
   <FormGroup controlId="formBasicPassword">
     <FormLabel>Password</FormLabel>
-    <FormControl type="password" placeholder="Password" />
+    <Input.Password placeholder="input password" />
   </FormGroup>
- 
-  <FormGroup controlId="formBasicChecbox">
-  
-    <FormCheck className="text-small" type="checkbox"  label="remember password" />
-  </FormGroup>
+
   <p align='center'>
-  <Button variant="primary" type="submit">
+  <Button type="primary" block >
    SignIn
   </Button>
+  <FormGroup controlId="formBasicChecbox">
+    <Checkbox onChange={onChange} className="text-muted"> 
+    Remember Password
+    </Checkbox>
+  </FormGroup>
   </p>
+  
 </Form>
-      
+    
     </div>
   );
 }
